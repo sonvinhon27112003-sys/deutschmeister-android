@@ -143,8 +143,73 @@ const DAILY_CARD_DATABASE = [
   { id: 'd22', category: 'co_khi', tag: 'Cơ khí Xưởng', de: 'der Drehmomentschlüssel', vi: 'Cờ lê lực / Khóa siết lực', note: 'Siết bu-lông đúng tiêu chuẩn Nm.', example: 'Ziehe die Radschrauben mit dem Drehmomentschlüssel an.' },
   { id: 'd23', category: 'co_khi', tag: 'Cơ khí Xưởng', de: 'der Span (-"e)', vi: 'Phôi gia công (phôi cắt kim loại)', note: 'Phôi sinh ra khi tiện, phay, bào kim loại.', example: 'Vorsicht vor den heißen Spänen beim Fräsen!' },
   { id: 'd24', category: 'co_khi', tag: 'Cơ khí Văn phòng', de: 'die FEM-Analyse', vi: 'Phân tích phần tử hữu hạn (Mô phỏng Ứng suất)', note: 'Dùng phần mềm ANSYS/SolidWorks Simulation.', example: 'Die FEM-Analyse zeigt hohe Spannungen am Radius.' },
-  { id: 'd25', category: 'co_khi', tag: 'Cơ khí Xưởng', de: 'die Geometrische Produktspezifikation (GPS)', vi: 'Dung sai hình học & vị trí (GD&T)', note: 'Độ đồng tâm, độ vuông góc, độ phẳng.', example: 'Lies die Form- und Lagetoleranzen gemäß GPS-Norm.' }
+  { id: 'd25', category: 'co_khi', tag: 'Cơ khí Xưởng', de: 'die Geometrische Produktspezifikation (GPS)', vi: 'Dung sai hình học & vị trí (GD&T)', note: 'Độ đồng tâm, độ vuông góc, độ phẳng.', example: 'Lies die Form- und Lagetoleranzen gemäß GPS-Norm.' },
+
+  // Nhóm 4: Giao tiếp công việc và đời sống (B1)
+  { id: 'd26', category: 'giao_tiep', tag: 'Giao tiếp B1', de: 'Könnten Sie mir dabei helfen?', vi: 'Ông/bà có thể giúp tôi việc này được không?', note: 'Cách nhờ giúp đỡ lịch sự trong môi trường công sở.', example: 'Könnten Sie mir bitte bei dieser Zeichnung helfen?' },
+  { id: 'd27', category: 'giao_tiep', tag: 'Giao tiếp B1', de: 'Ich kümmere mich darum.', vi: 'Tôi sẽ xử lý việc đó.', note: 'Dùng khi nhận trách nhiệm giải quyết một công việc.', example: 'Keine Sorge, ich kümmere mich um die Bestellung.' },
+  { id: 'd28', category: 'giao_tiep', tag: 'Giao tiếp B1', de: 'Das hängt davon ab.', vi: 'Điều đó còn tùy thuộc vào.', note: 'Dùng để trả lời khi chưa thể khẳng định ngay.', example: 'Das hängt davon ab, wie viel Zeit wir haben.' },
+  { id: 'd29', category: 'giao_tiep', tag: 'Giao tiếp B1', de: 'Ich bin damit einverstanden.', vi: 'Tôi đồng ý với việc đó.', note: 'Cách thể hiện sự đồng ý rõ ràng trong cuộc họp.', example: 'Mit diesem Vorschlag bin ich einverstanden.' },
+  { id: 'd30', category: 'giao_tiep', tag: 'Giao tiếp B1', de: 'Könnten wir einen Termin vereinbaren?', vi: 'Chúng ta có thể hẹn một lịch được không?', note: 'Câu hữu ích khi sắp xếp cuộc họp hoặc trao đổi kỹ thuật.', example: 'Könnten wir für morgen einen Termin vereinbaren?' },
+  { id: 'd31', category: 'giao_tiep', tag: 'Giao tiếp B1', de: 'Ich habe das leider nicht ganz verstanden.', vi: 'Tiếc là tôi chưa hiểu rõ hoàn toàn.', note: 'Thẳng thắn nhưng lịch sự khi chưa hiểu hướng dẫn.', example: 'Könnten Sie es bitte noch einmal erklären?' },
+  { id: 'd32', category: 'giao_tiep', tag: 'Giao tiếp B1', de: 'Soweit ich weiß, ist das richtig.', vi: 'Theo như tôi biết thì điều đó đúng.', note: 'Dùng khi đưa ra thông tin nhưng vẫn muốn thể hiện mức độ chắc chắn vừa phải.', example: 'Soweit ich weiß, beginnt die Besprechung um neun.' },
+  { id: 'd33', category: 'giao_tiep', tag: 'Giao tiếp B1', de: 'Wir sollten eine andere Lösung finden.', vi: 'Chúng ta nên tìm một giải pháp khác.', note: 'Mẫu câu đề xuất giải pháp khi gặp vấn đề.', example: 'Die Kosten sind zu hoch. Wir sollten eine andere Lösung finden.' },
+  { id: 'd34', category: 'giao_tiep', tag: 'Giao tiếp B1', de: 'Ich melde mich später bei Ihnen.', vi: 'Tôi sẽ liên hệ lại với ông/bà sau.', note: 'Cách kết thúc trao đổi khi cần kiểm tra thông tin trước.', example: 'Ich prüfe die Maße und melde mich später bei Ihnen.' },
+  { id: 'd35', category: 'giao_tiep', tag: 'Giao tiếp B1', de: 'Vielen Dank für Ihre Rückmeldung.', vi: 'Cảm ơn ông/bà đã phản hồi.', note: 'Câu thường dùng trong email và trao đổi công việc.', example: 'Vielen Dank für Ihre schnelle Rückmeldung.' },
+
+  // Nhóm 5: Ngữ pháp ứng dụng B1/B2
+  { id: 'd36', category: 'ngu_phap', tag: 'Ngữ pháp B1', de: 'Obwohl + Nebensatz', vi: 'Mặc dù ...', note: 'Obwohl mở đầu mệnh đề phụ; động từ chia đứng cuối mệnh đề.', example: 'Obwohl die Maschine alt ist, funktioniert sie zuverlässig.' },
+  { id: 'd37', category: 'ngu_phap', tag: 'Ngữ pháp B1', de: 'Damit + Nebensatz', vi: 'Để / nhằm mục đích ...', note: 'Damit diễn tả mục đích; động từ chia đứng cuối mệnh đề.', example: 'Wir prüfen das Bauteil, damit keine Fehler entstehen.' },
+  { id: 'd38', category: 'ngu_phap', tag: 'Ngữ pháp B1', de: 'Nachdem + Plusquamperfekt', vi: 'Sau khi một việc đã xảy ra ...', note: 'Trong văn kể quá khứ, mệnh đề nachdem thường dùng Plusquamperfekt trước hành động ở Präteritum/Perfekt.', example: 'Nachdem wir die Zeichnung geprüft hatten, starteten wir die Produktion.' },
+  { id: 'd39', category: 'ngu_phap', tag: 'Ngữ pháp B1', de: 'Infinitiv mit zu', vi: 'Động từ nguyên mẫu có zu', note: 'Thường dùng sau versuchen, planen, vergessen, beginnen. Với động từ tách, zu đứng giữa tiền tố và gốc động từ.', example: 'Ich versuche, den Fehler zu finden.' },
+  { id: 'd40', category: 'ngu_phap', tag: 'Ngữ pháp B1', de: 'Indirekte Fragen', vi: 'Câu hỏi gián tiếp', note: 'Trong câu hỏi gián tiếp, động từ chia đứng cuối mệnh đề.', example: 'Können Sie mir sagen, wann die Lieferung kommt?' },
+  { id: 'd41', category: 'ngu_phap', tag: 'Ngữ pháp B1', de: 'Passiv: werden + Partizip II', vi: 'Câu bị động ở hiện tại', note: 'Nhấn mạnh hành động hoặc đối tượng chịu tác động thay vì người thực hiện.', example: 'Die Teile werden in der Werkstatt geprüft.' },
+  { id: 'd42', category: 'ngu_phap', tag: 'Ngữ pháp B1', de: 'wegen + Genitiv', vi: 'Bởi vì / do ...', note: 'Trong văn viết chuẩn, wegen thường đi với Genitiv.', example: 'Wegen des Defekts steht die Maschine still.' },
+  { id: 'd43', category: 'ngu_phap', tag: 'Ngữ pháp B1', de: 'nicht nur ... sondern auch', vi: 'Không những ... mà còn ...', note: 'Nối hai thành phần có chức năng ngữ pháp tương đương.', example: 'Der Ingenieur prüft nicht nur die Maße, sondern auch die Oberfläche.' },
+  { id: 'd44', category: 'ngu_phap', tag: 'Ngữ pháp B2', de: 'Trotzdem + Hauptsatz', vi: 'Tuy vậy / mặc dù thế', note: 'Trotzdem là trạng từ nối; động từ chia đứng ngay sau trotzdem ở vị trí thứ hai.', example: 'Die Zeichnung ist kompliziert. Trotzdem kann ich sie verstehen.' },
+  { id: 'd45', category: 'ngu_phap', tag: 'Ngữ pháp B2', de: 'Falls + Nebensatz', vi: 'Trong trường hợp nếu ...', note: 'Falls mở đầu mệnh đề phụ, động từ chia đứng cuối.', example: 'Falls ein Problem auftritt, informieren Sie bitte den Meister.' },
+
+  // Nhóm 6: Cơ khí, bản vẽ và CAD
+  { id: 'd46', category: 'co_khi', tag: 'Cơ khí CAD', de: 'die Schnittansicht', vi: 'Hình chiếu mặt cắt', note: 'Biểu diễn cấu tạo bên trong chi tiết bằng mặt phẳng cắt trên bản vẽ.', example: 'Die Schnittansicht zeigt die innere Geometrie des Bauteils.' },
+  { id: 'd47', category: 'co_khi', tag: 'Cơ khí CAD', de: 'die Schweißnaht', vi: 'Mối hàn / đường hàn', note: 'Thuật ngữ quan trọng khi đọc bản vẽ kết cấu thép và bản vẽ hàn.', example: 'Die Schweißnaht muss vollständig geprüft werden.' },
+  { id: 'd48', category: 'co_khi', tag: 'Cơ khí CAD', de: 'die Blechdicke', vi: 'Chiều dày tấm kim loại', note: 'Dùng khi chọn tôn/tấm và kiểm tra kích thước vật liệu.', example: 'Die Blechdicke beträgt sechs Millimeter.' },
+  { id: 'd49', category: 'co_khi', tag: 'Cơ khí CAD', de: 'der Lochabstand', vi: 'Khoảng cách tâm lỗ', note: 'Khoảng cách giữa tâm hai lỗ trên chi tiết hoặc bản vẽ.', example: 'Bitte kontrollieren Sie den Lochabstand.' },
+  { id: 'd50', category: 'co_khi', tag: 'Cơ khí CAD', de: 'die Baugruppe', vi: 'Cụm lắp ráp', note: 'Tập hợp nhiều chi tiết được lắp thành một cụm trong CAD.', example: 'Die Baugruppe besteht aus zwölf Einzelteilen.' },
+  { id: 'd51', category: 'co_khi', tag: 'Cơ khí Xưởng', de: 'die Maßtoleranz', vi: 'Dung sai kích thước', note: 'Giới hạn sai lệch cho phép của một kích thước.', example: 'Die Maßtoleranz beträgt plus/minus 0,1 Millimeter.' },
+  { id: 'd52', category: 'co_khi', tag: 'Cơ khí Xưởng', de: 'die Oberfläche', vi: 'Bề mặt chi tiết', note: 'Thường gặp khi mô tả độ nhám, lớp phủ và chất lượng gia công.', example: 'Die Oberfläche muss glatt und sauber sein.' },
+  { id: 'd53', category: 'co_khi', tag: 'Cơ khí Xưởng', de: 'die Instandhaltung', vi: 'Công tác bảo dưỡng và duy trì thiết bị', note: 'Khái niệm rộng hơn bảo trì định kỳ, bao gồm duy trì khả năng hoạt động của máy.', example: 'Die Instandhaltung plant die Reparatur der Anlage.' },
+  { id: 'd54', category: 'co_khi', tag: 'Cơ khí CAD', de: 'die Stückliste', vi: 'Bảng kê vật tư / danh mục chi tiết (BOM)', note: 'Danh sách các chi tiết, số lượng và vật liệu trong một cụm lắp ráp.', example: 'Die Stückliste enthält alle benötigten Bauteile.' },
+  { id: 'd55', category: 'co_khi', tag: 'Cơ khí CAD', de: 'die Bezugskante', vi: 'Cạnh chuẩn / cạnh tham chiếu', note: 'Cạnh dùng làm cơ sở đo hoặc xác định vị trí trong bản vẽ.', example: 'Der Abstand wird von der Bezugskante gemessen.' }
+
 ];
+
+
+// Tạo bộ bài ổn định theo ngày: mỗi ngày 5 giao tiếp + 5 ngữ pháp + 5 cơ khí.
+// Nội dung được biên soạn sẵn trong ứng dụng, không cần mạng hay API key.
+const getLocalDateKey = () => {
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+};
+
+const dailySortScore = (id, dateKey) => {
+  const input = `${dateKey}-${id}`;
+  let hash = 2166136261;
+  for (let i = 0; i < input.length; i++) {
+    hash ^= input.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
+};
+
+const buildDailyDeck = (dateKey) => {
+  const categories = ['giao_tiep', 'ngu_phap', 'co_khi'];
+  return categories.flatMap(category =>
+    DAILY_CARD_DATABASE
+      .filter(card => card.category === category)
+      .sort((a, b) => dailySortScore(a.id, dateKey) - dailySortScore(b.id, dateKey))
+      .slice(0, 5)
+  );
+};
 
 export default function App() {
   // Theme & App Navigation State
@@ -197,9 +262,15 @@ export default function App() {
   };
 
   // Daily Hub & Flashcard Deck States
+  const [dailyDate, setDailyDate] = useState(() => getLocalDateKey());
   const [dailyCards, setDailyCards] = useState(() => {
+    const today = getLocalDateKey();
+    const savedDate = localStorage.getItem('dm_daily_date');
     const saved = localStorage.getItem('dm_daily_cards');
-    return saved ? JSON.parse(saved) : DAILY_CARD_DATABASE;
+    if (savedDate === today && saved) {
+      try { return JSON.parse(saved); } catch { /* tạo lại bộ bài nếu dữ liệu lưu lỗi */ }
+    }
+    return buildDailyDeck(today);
   });
 
   const [masteredIds, setMasteredIds] = useState(() => {
@@ -220,16 +291,35 @@ export default function App() {
   const filteredDailyCards = dailyCards.filter(c => selectedFilter === 'all' || c.category === selectedFilter);
   const currentCard = filteredDailyCards[activeCardIndex] || filteredDailyCards[0];
 
-  // Sync / Refresh Daily Deck
+  // Tự đổi bộ 15 thẻ khi sang ngày mới; nút bấm tải lại bộ của ngày hiện tại.
   const handleRefreshDailyDeck = () => {
-    // Shuffle deck to present a fresh 20-25 daily card learning experience
-    const shuffled = [...DAILY_CARD_DATABASE].sort(() => 0.5 - Math.random());
-    setDailyCards(shuffled);
-    localStorage.setItem('dm_daily_cards', JSON.stringify(shuffled));
+    const today = getLocalDateKey();
+    const deck = buildDailyDeck(today);
+    setDailyDate(today);
+    setDailyCards(deck);
+    localStorage.setItem('dm_daily_date', today);
+    localStorage.setItem('dm_daily_cards', JSON.stringify(deck));
     setActiveCardIndex(0);
     setIsFlipped(false);
-    alert("Đã cập nhật bộ bài học 25 từ vựng, mẫu câu & ngữ pháp mới cho hôm nay! 🇩🇪");
   };
+
+  useEffect(() => {
+    const checkNewDay = () => {
+      const today = getLocalDateKey();
+      if (today !== dailyDate) {
+        const deck = buildDailyDeck(today);
+        setDailyDate(today);
+        setDailyCards(deck);
+        setActiveCardIndex(0);
+        setIsFlipped(false);
+        localStorage.setItem('dm_daily_date', today);
+        localStorage.setItem('dm_daily_cards', JSON.stringify(deck));
+      }
+    };
+    checkNewDay();
+    const timer = window.setInterval(checkNewDay, 60000);
+    return () => window.clearInterval(timer);
+  }, [dailyDate]);
 
   // Toggle Mark as Mastered
   const toggleMastered = (cardId) => {
@@ -617,13 +707,13 @@ END:VCALENDAR`;
                     <Sparkle className="w-3.5 h-3.5" />
                     Daily Learning Hub • Cập Nhật Mỗi Ngày
                   </span>
-                  <span className="text-xs text-emerald-200">25 Từ vựng & Ngữ pháp mới</span>
+                  <span className="text-xs text-emerald-200">15 mục học mỗi ngày</span>
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold leading-tight">
                   Gói Học Hàng Ngày: Giao Tiếp • Ngữ Pháp B1/B2 • Cơ Khí
                 </h2>
                 <p className="text-emerald-100/80 text-xs md:text-sm leading-relaxed">
-                  Rèn luyện 20–30 thẻ Flashcards tương tác mỗi ngày kèm âm thanh phát âm chuẩn. Đã hoàn thành <strong className="text-white font-bold">{masteredIds.length} / {dailyCards.length}</strong> mục bài học trong ngày.
+                  Mỗi ngày tự chuyển sang 15 thẻ mới: 5 giao tiếp, 5 ngữ pháp và 5 cơ khí kèm âm thanh phát âm chuẩn. Ngày học: <strong className="text-white font-bold">{dailyDate}</strong> • Đã thuộc <strong className="text-white font-bold">{dailyCards.filter(card => masteredIds.includes(card.id)).length} / {dailyCards.length}</strong> mục hôm nay.
                 </p>
               </div>
 
@@ -634,7 +724,7 @@ END:VCALENDAR`;
                   className="px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-2xl text-xs font-semibold flex items-center space-x-2 backdrop-blur-md transition"
                 >
                   <RotateCw className="w-4 h-4" />
-                  <span>Đổi Gói Bài Học Mới</span>
+                  <span>Tải lại bài hôm nay</span>
                 </button>
               </div>
             </div>
@@ -644,7 +734,7 @@ END:VCALENDAR`;
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="flex items-center space-x-2 overflow-x-auto pb-1 sm:pb-0">
                   {[
-                    { id: 'all', label: 'Tất cả (25)' },
+                    { id: 'all', label: 'Tất cả (15)' },
                     { id: 'giao_tiep', label: '💬 Giao tiếp hàng ngày' },
                     { id: 'ngu_phap', label: '📘 Ngữ pháp B1/B2' },
                     { id: 'co_khi', label: '⚙️ Cơ khí (Xưởng & Văn phòng)' }
@@ -673,7 +763,7 @@ END:VCALENDAR`;
                   <div className="w-32 bg-slate-100 dark:bg-slate-800 rounded-full h-2.5 overflow-hidden border border-slate-200 dark:border-slate-700">
                     <div
                       className="bg-emerald-600 h-full rounded-full transition-all duration-300"
-                      style={{ width: `${Math.round((masteredIds.length / dailyCards.length) * 100)}%` }}
+                      style={{ width: `${Math.round((dailyCards.filter(card => masteredIds.includes(card.id)).length / dailyCards.length) * 100)}%` }}
                     />
                   </div>
                   <span className="font-bold text-emerald-700 dark:text-emerald-400">
