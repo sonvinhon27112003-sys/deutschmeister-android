@@ -211,6 +211,173 @@ const buildDailyDeck = (dateKey) => {
   );
 };
 
+
+const VOCAB_BASES = [
+  { stem: 'Sicherheits', vi: 'an toàn lao động' },
+  { stem: 'Qualitäts', vi: 'chất lượng' },
+  { stem: 'Produktions', vi: 'sản xuất' },
+  { stem: 'Arbeits', vi: 'công việc / lao động' },
+  { stem: 'Maschinen', vi: 'máy móc' },
+  { stem: 'Werkstoff', vi: 'vật liệu' },
+  { stem: 'Konstruktions', vi: 'thiết kế' },
+  { stem: 'Fertigungs', vi: 'chế tạo / gia công' },
+  { stem: 'Montage', vi: 'lắp ráp' },
+  { stem: 'Abnahme', vi: 'nghiệm thu' },
+  { stem: 'Mess', vi: 'đo lường' },
+  { stem: 'Zeichnungs', vi: 'bản vẽ' },
+  { stem: 'Werkzeug', vi: 'dụng cụ' },
+  { stem: 'Anlagen', vi: 'hệ thống thiết bị' },
+  { stem: 'Projekt', vi: 'dự án' },
+  { stem: 'Kunden', vi: 'khách hàng' },
+  { stem: 'Kosten', vi: 'chi phí' },
+  { stem: 'Energie', vi: 'năng lượng' },
+  { stem: 'Umwelt', vi: 'môi trường' },
+  { stem: 'Daten', vi: 'dữ liệu' },
+  { stem: 'Betriebs', vi: 'vận hành / doanh nghiệp' },
+  { stem: 'Wartungs', vi: 'bảo trì' },
+  { stem: 'Ersatzteil', vi: 'phụ tùng thay thế' },
+  { stem: 'Lager', vi: 'kho' },
+  { stem: 'Transport', vi: 'vận chuyển' }
+];
+const VOCAB_ENDINGS = [
+  { suffix: 'prüfung', article: 'die', vi: 'kiểm tra' },
+  { suffix: 'planung', article: 'die', vi: 'lập kế hoạch' },
+  { suffix: 'dokumentation', article: 'die', vi: 'tài liệu hóa' },
+  { suffix: 'prozess', article: 'der', vi: 'quy trình' },
+  { suffix: 'ablauf', article: 'der', vi: 'trình tự / quy trình' },
+  { suffix: 'kontrolle', article: 'die', vi: 'kiểm soát' },
+  { suffix: 'bericht', article: 'der', vi: 'báo cáo' },
+  { suffix: 'methode', article: 'die', vi: 'phương pháp' },
+  { suffix: 'maschine', article: 'die', vi: 'máy' },
+  { suffix: 'anlage', article: 'die', vi: 'thiết bị / hệ thống' },
+  { suffix: 'werkzeug', article: 'das', vi: 'dụng cụ' },
+  { suffix: 'bauteil', article: 'das', vi: 'chi tiết máy' },
+  { suffix: 'material', article: 'das', vi: 'vật liệu' },
+  { suffix: 'qualität', article: 'die', vi: 'chất lượng' },
+  { suffix: 'sicherheit', article: 'die', vi: 'an toàn' },
+  { suffix: 'messung', article: 'die', vi: 'phép đo' },
+  { suffix: 'toleranz', article: 'die', vi: 'dung sai' },
+  { suffix: 'zeichnung', article: 'die', vi: 'bản vẽ' },
+  { suffix: 'berechnung', article: 'die', vi: 'phép tính / tính toán' },
+  { suffix: 'konstruktion', article: 'die', vi: 'kết cấu / thiết kế' },
+  { suffix: 'fertigung', article: 'die', vi: 'chế tạo / gia công' },
+  { suffix: 'montage', article: 'die', vi: 'lắp ráp' },
+  { suffix: 'wartung', article: 'die', vi: 'bảo trì' },
+  { suffix: 'reparatur', article: 'die', vi: 'sửa chữa' },
+  { suffix: 'bestellung', article: 'die', vi: 'đơn đặt hàng' },
+  { suffix: 'lieferung', article: 'die', vi: 'giao hàng' },
+  { suffix: 'lagerung', article: 'die', vi: 'lưu kho' },
+  { suffix: 'transport', article: 'der', vi: 'vận chuyển' },
+  { suffix: 'verpackung', article: 'die', vi: 'đóng gói' },
+  { suffix: 'schulung', article: 'die', vi: 'đào tạo' },
+  { suffix: 'vorschrift', article: 'die', vi: 'quy định' },
+  { suffix: 'anweisung', article: 'die', vi: 'hướng dẫn' },
+  { suffix: 'abteilung', article: 'die', vi: 'bộ phận / phòng ban' },
+  { suffix: 'mitarbeiter', article: 'der', vi: 'nhân viên' },
+  { suffix: 'arbeitsplatz', article: 'der', vi: 'vị trí làm việc' },
+  { suffix: 'arbeitszeit', article: 'die', vi: 'thời gian làm việc' },
+  { suffix: 'kosten', article: 'die', vi: 'chi phí' },
+  { suffix: 'energieverbrauch', article: 'der', vi: 'mức tiêu thụ năng lượng' },
+  { suffix: 'umweltschutz', article: 'der', vi: 'bảo vệ môi trường' },
+  { suffix: 'fehleranalyse', article: 'die', vi: 'phân tích lỗi' }
+];
+const VOCAB_SPECIALS = {
+  '0-14': ['Sicherheitsstandard', 'der', 'tiêu chuẩn an toàn'],
+  '8-21': ['Montagearbeit', 'die', 'công việc lắp ráp'],
+  '12-10': ['Werkzeugsatz', 'der', 'bộ dụng cụ'],
+  '16-36': ['Gesamtkosten', 'die', 'tổng chi phí'],
+  '24-27': ['Transportweg', 'der', 'tuyến đường vận chuyển']
+};
+const EXPANDED_VOCABULARY = VOCAB_BASES.flatMap((base, bi) =>
+  VOCAB_ENDINGS.map((ending, ei) => {
+    const key = bi + '-' + ei;
+    const special = VOCAB_SPECIALS[key];
+    const word = special ? special[0] : base.stem + ending.suffix;
+    const article = special ? special[1] : ending.article;
+    const meaning = special ? special[2] : base.vi + ' – ' + ending.vi;
+    const exampleTemplates = [
+      'Der Fachbegriff „' + word + '“ wird in technischen Dokumenten verwendet.',
+      'Bitte prüfen Sie den Begriff „' + word + '“ in der Zeichnung.',
+      'Wir verwenden den Begriff „' + word + '“ bei der technischen Planung.',
+      'Die Dokumentation enthält den Begriff „' + word + '“.',
+      'Kennen Sie die Bedeutung des Begriffs „' + word + '“?'
+    ];
+    return {
+      id: 'v' + String(bi * 40 + ei + 1).padStart(4, '0'),
+      category: 'tu_vung_moi',
+      tag: 'Cơ khí & kỹ thuật',
+      de: article + ' ' + word,
+      vi: meaning,
+      note: 'Từ ghép kỹ thuật: chú ý thành phần đầu và danh từ chính ở cuối. Một số cách ghép ít gặp cần học kèm ngữ cảnh chuyên ngành.',
+      example: exampleTemplates[(bi * 40 + ei) % exampleTemplates.length]
+    };
+  })
+);
+
+const GRAMMAR_TOPICS = [
+  { level: 'A1', title: 'Động từ ở vị trí số 2 (V2)', vi: 'Trong câu chính, động từ đã chia thường đứng ở vị trí thứ hai.', note: 'Nếu đưa thời gian hoặc địa điểm lên đầu, chủ ngữ đứng sau động từ.', examples: ['Ich arbeite heute in der Werkstatt.', 'Heute arbeite ich in der Werkstatt.'] },
+  { level: 'A1', title: 'Động từ sein', vi: 'Dùng sein để nói về danh tính, nghề nghiệp và trạng thái.', note: 'Chia: ich bin, du bist, er/sie/es ist, wir sind, ihr seid, sie/Sie sind.', examples: ['Ich bin Maschinenbauingenieur.', 'Die Maschine ist heute außer Betrieb.'] },
+  { level: 'A1', title: 'Động từ haben', vi: 'Haben diễn tả sở hữu hoặc có một thứ gì đó.', note: 'Haben đi với tân ngữ Akkusativ.', examples: ['Wir haben eine neue Zeichnung.', 'Der Betrieb hat drei CNC-Maschinen.'] },
+  { level: 'A1', title: 'Mạo từ xác định der/die/das', vi: 'Mạo từ xác định thay đổi theo giống và cách của danh từ.', note: 'Học danh từ kèm mạo từ để nhớ giống.', examples: ['Der Motor läuft ruhig.', 'Die Zeichnung liegt auf dem Tisch.'] },
+  { level: 'A1', title: 'Akkusativ với tân ngữ trực tiếp', vi: 'Tân ngữ trực tiếp thường ở Akkusativ; giống đực đổi der thành den.', note: 'Động từ như brauchen, prüfen, sehen thường có tân ngữ Akkusativ.', examples: ['Ich prüfe den Motor.', 'Wir brauchen ein Ersatzteil.'] },
+  { level: 'A1', title: 'Danh từ số nhiều (Plural)', vi: 'Danh từ có nhiều cách tạo số nhiều; cần học cùng dạng số nhiều.', note: 'Mạo từ số nhiều xác định là die ở Nominativ và Akkusativ.', examples: ['Die Schrauben sind neu.', 'Die Bauteile liegen neben der Maschine.'] },
+  { level: 'A1', title: 'Câu hỏi W-Fragen', vi: 'Từ để hỏi đứng đầu câu, sau đó là động từ đã chia.', note: 'Ví dụ: wer, was, wann, wo, warum, wie.', examples: ['Wann beginnt die Schicht?', 'Wo liegt die technische Zeichnung?'] },
+  { level: 'A1', title: 'Câu hỏi Ja/Nein', vi: 'Trong câu hỏi có/không, động từ đã chia đứng đầu câu.', note: 'Câu trả lời thường bắt đầu bằng ja, nein hoặc doch.', examples: ['Ist die Maschine bereit?', 'Haben Sie die Maße geprüft?'] },
+  { level: 'A1', title: 'Phủ định nicht', vi: 'Nicht phủ định động từ, tính từ hoặc cả ý câu.', note: 'Vị trí của nicht phụ thuộc phần muốn phủ định.', examples: ['Die Anlage funktioniert nicht.', 'Der Motor startet heute nicht.'] },
+  { level: 'A1', title: 'Phủ định kein', vi: 'Kein phủ định danh từ thường đi với ein/eine hoặc không có mạo từ.', note: 'Kein biến đổi như ein: kein, keine, keinen...', examples: ['Wir haben kein Ersatzteil.', 'Das ist keine technische Zeichnung.'] },
+  { level: 'A1', title: 'Động từ khuyết thiếu können', vi: 'Können diễn tả khả năng hoặc xin phép; động từ chính ở nguyên mẫu cuối câu.', note: 'Chia: ich kann, du kannst, er kann, wir können.', examples: ['Ich kann die Zeichnung lesen.', 'Können Sie mir bitte helfen?'] },
+  { level: 'A1', title: 'Động từ khuyết thiếu müssen', vi: 'Müssen diễn tả sự cần thiết hoặc bắt buộc.', note: 'Động từ chính ở nguyên mẫu cuối câu.', examples: ['Wir müssen die Maße prüfen.', 'Die Maschine muss heute stoppen.'] },
+  { level: 'A1', title: 'Động từ khuyết thiếu dürfen', vi: 'Dürfen diễn tả được phép hoặc không được phép.', note: 'Nicht dürfen mang nghĩa bị cấm.', examples: ['Hier darf man nicht rauchen.', 'Sie dürfen die Anlage nicht öffnen.'] },
+  { level: 'A1', title: 'Động từ tách (Trennbare Verben)', vi: 'Tiền tố tách thường chuyển về cuối câu chính.', note: 'Ví dụ: ausschalten → Ich schalte die Maschine aus.', examples: ['Ich schalte die Maschine aus.', 'Der Techniker baut das Teil ein.'] },
+  { level: 'A1', title: 'Thời gian và giới từ um / am / im', vi: 'Um dùng với giờ; am với ngày; im với tháng hoặc mùa.', note: 'Ví dụ: um acht Uhr, am Montag, im Januar.', examples: ['Ich beginne um acht Uhr.', 'Am Montag arbeiten wir im Büro.'] },
+  { level: 'A2', title: 'Perfekt với haben', vi: 'Perfekt thường dùng haben + Partizip II cho phần lớn động từ có tân ngữ.', note: 'Partizip II thường đứng cuối câu.', examples: ['Ich habe den Bericht geschrieben.', 'Wir haben die Teile bestellt.'] },
+  { level: 'A2', title: 'Perfekt với sein', vi: 'Perfekt dùng sein với nhiều động từ chỉ di chuyển hoặc thay đổi trạng thái.', note: 'Ví dụ: gehen, kommen, fahren, aufstehen, ausfallen.', examples: ['Der Techniker ist gekommen.', 'Die Maschine ist plötzlich ausgefallen.'] },
+  { level: 'A2', title: 'Präteritum của sein và haben', vi: 'Sein và haben thường dùng Präteritum trong lời kể quá khứ.', note: 'war / waren; hatte / hatten.', examples: ['Ich war gestern im Büro.', 'Wir hatten heute wenig Zeit.'] },
+  { level: 'A2', title: 'So sánh hơn (Komparativ)', vi: 'Tính từ thường thêm -er; dùng als để so sánh hai đối tượng.', note: 'Một số tính từ có biến âm: alt → älter, groß → größer.', examples: ['Dieses Bauteil ist leichter als das alte.', 'Die neue Maschine arbeitet schneller.'] },
+  { level: 'A2', title: 'So sánh nhất (Superlativ)', vi: 'Dạng thường gặp: am + tính từ + -sten hoặc mạo từ + tính từ -ste.', note: 'Chú ý biến âm ở một số tính từ.', examples: ['Diese Lösung ist am besten.', 'Das ist die wichtigste Prüfung.'] },
+  { level: 'A2', title: 'Mệnh đề phụ với weil', vi: 'Weil diễn tả nguyên nhân; động từ chia đứng cuối mệnh đề phụ.', note: 'Dùng weil để giải thích lý do.', examples: ['Wir warten, weil die Maschine defekt ist.', 'Ich frage nach, weil ich die Anweisung nicht verstehe.'] },
+  { level: 'A2', title: 'Mệnh đề phụ với dass', vi: 'Dass mở đầu mệnh đề nội dung; động từ chia đứng cuối.', note: 'Thường dùng sau sagen, glauben, wissen, hoffen.', examples: ['Ich glaube, dass der Plan funktioniert.', 'Der Meister sagt, dass die Lieferung morgen kommt.'] },
+  { level: 'A2', title: 'Mệnh đề điều kiện với wenn', vi: 'Wenn diễn tả điều kiện hoặc sự việc lặp lại; động từ chia đứng cuối mệnh đề phụ.', note: 'Nếu mệnh đề wenn đứng đầu, động từ chính đứng ngay sau dấu phẩy.', examples: ['Wenn ein Fehler auftritt, stoppen wir die Maschine.', 'Wenn Sie fertig sind, geben Sie mir bitte Bescheid.'] },
+  { level: 'A2', title: 'Động từ phản thân (Reflexive Verben)', vi: 'Một số động từ đi kèm đại từ phản thân mich, dich, sich...', note: 'Ví dụ: sich interessieren für, sich vorbereiten auf.', examples: ['Ich interessiere mich für Konstruktion.', 'Wir bereiten uns auf die Prüfung vor.'] },
+  { level: 'A2', title: 'Wechselpräpositionen: Dativ / Akkusativ', vi: 'Vị trí tĩnh dùng Dativ; hướng di chuyển/đặt vào dùng Akkusativ.', note: 'Wo? → Dativ. Wohin? → Akkusativ.', examples: ['Das Werkzeug liegt auf dem Tisch.', 'Ich lege das Werkzeug auf den Tisch.'] },
+  { level: 'B1', title: 'Mệnh đề nhượng bộ obwohl', vi: 'Obwohl diễn tả sự tương phản; động từ chia đứng cuối mệnh đề phụ.', note: 'Có thể đặt obwohl ở đầu hoặc giữa câu.', examples: ['Obwohl es spät ist, arbeiten wir weiter.', 'Obwohl die Zeichnung kompliziert ist, verstehe ich sie.'] },
+  { level: 'B1', title: 'Trạng từ nối trotzdem', vi: 'Trotzdem nối hai ý tương phản; động từ chia đứng vị trí thứ hai.', note: 'Sau trotzdem, động từ chia đứng ngay sau nó.', examples: ['Die Zeit ist knapp. Trotzdem prüfen wir alles.', 'Die Maschine ist alt. Trotzdem funktioniert sie zuverlässig.'] },
+  { level: 'B1', title: 'Mệnh đề mục đích damit', vi: 'Damit diễn tả mục đích, thường dùng khi hai mệnh đề có chủ ngữ khác nhau.', note: 'Động từ chia đứng cuối mệnh đề damit.', examples: ['Wir prüfen das Teil, damit keine Fehler entstehen.', 'Ich erkläre den Ablauf, damit alle ihn verstehen.'] },
+  { level: 'B1', title: 'um ... zu + Infinitiv', vi: 'Dùng để diễn tả mục đích khi chủ ngữ hai vế giống nhau.', note: 'Zu đứng trước động từ nguyên mẫu; với động từ tách, zu nằm giữa tiền tố và gốc.', examples: ['Wir messen erneut, um sicherzugehen.', 'Ich lerne Deutsch, um in Deutschland zu arbeiten.'] },
+  { level: 'B1', title: 'Mệnh đề quan hệ (Relativsätze)', vi: 'Đại từ quan hệ thay cho danh từ; động từ chia đứng cuối mệnh đề.', note: 'Giống và số theo danh từ đứng trước; cách phụ thuộc vai trò trong mệnh đề.', examples: ['Das ist der Kollege, der die Anlage wartet.', 'Das ist die Maschine, die wir gestern repariert haben.'] },
+  { level: 'B1', title: 'Câu hỏi gián tiếp (Indirekte Fragen)', vi: 'Trong câu hỏi gián tiếp, động từ chia đứng cuối mệnh đề.', note: 'Thường bắt đầu bằng Können Sie mir sagen..., Wissen Sie...?', examples: ['Können Sie mir sagen, wann die Schicht endet?', 'Wissen Sie, wo die Zeichnung liegt?'] },
+  { level: 'B1', title: 'Bị động hiện tại (Passiv Präsens)', vi: 'Werden + Partizip II nhấn mạnh hành động hoặc đối tượng chịu tác động.', note: 'Ví dụ: wird geprüft, werden montiert.', examples: ['Das Bauteil wird geprüft.', 'Die Teile werden in der Werkstatt montiert.'] },
+  { level: 'B1', title: 'Bị động quá khứ (Passiv Präteritum)', vi: 'Wurde / wurden + Partizip II diễn tả hành động bị động trong quá khứ.', note: 'Dùng trong báo cáo hoặc mô tả quy trình đã hoàn thành.', examples: ['Die Maschine wurde repariert.', 'Der Bericht wurde gestern geschickt.'] },
+  { level: 'B1', title: 'Infinitiv mit zu', vi: 'Zu + động từ nguyên mẫu thường dùng sau versuchen, planen, vergessen...', note: 'Với động từ tách: einzuschalten, aufzubauen.', examples: ['Ich versuche, den Fehler zu finden.', 'Wir planen, die Anlage zu modernisieren.'] },
+  { level: 'B1', title: 'Konjunktiv II lịch sự', vi: 'Könnte / würde giúp yêu cầu hoặc đề xuất lịch sự hơn.', note: 'Dùng phổ biến trong giao tiếp công sở.', examples: ['Könnten Sie mir bitte helfen?', 'Ich würde gern einen Termin vereinbaren.'] },
+  { level: 'B1', title: 'Đuôi tính từ sau mạo từ', vi: 'Tính từ đứng trước danh từ phải chia đuôi theo giống, số và cách.', note: 'Học theo cụm danh từ hoàn chỉnh: einen neuen Motor, die geprüften Teile.', examples: ['Wir brauchen einen neuen Motor.', 'Die geprüften Teile liegen hier.'] },
+  { level: 'B1', title: 'wegen + Genitiv', vi: 'Trong văn viết chuẩn, wegen thường đi với Genitiv.', note: 'Ví dụ: wegen des Defekts, wegen der Lieferung.', examples: ['Wegen des Defekts steht die Maschine still.', 'Wegen der verspäteten Lieferung warten wir noch.'] },
+  { level: 'B1', title: 'nicht nur ... sondern auch', vi: 'Nối hai thành phần có chức năng ngữ pháp tương đương.', note: 'Dùng để nhấn mạnh hai yếu tố cùng quan trọng.', examples: ['Der Ingenieur prüft nicht nur die Maße, sondern auch die Oberfläche.', 'Wir brauchen nicht nur Zeit, sondern auch Material.'] },
+  { level: 'B1', title: 'weder ... noch', vi: 'Diễn tả phủ định cả hai lựa chọn: không ... cũng không ...', note: 'Các thành phần nối với nhau nên song song về cấu trúc.', examples: ['Wir haben weder Zeit noch Ersatzteile.', 'Die Maschine ist weder laut noch langsam.'] },
+  { level: 'B1', title: 'Nachdem + Plusquamperfekt', vi: 'Sau nachdem, hành động xảy ra trước thường dùng Plusquamperfekt.', note: 'Hành động sau đó dùng Präteritum hoặc Perfekt.', examples: ['Nachdem wir die Zeichnung geprüft hatten, starteten wir die Produktion.', 'Nachdem der Techniker angekommen war, begann die Reparatur.'] },
+  { level: 'B2', title: 'Plusquamperfekt', vi: 'Hatte/war + Partizip II diễn tả hành động xảy ra trước một mốc quá khứ khác.', note: 'Phân biệt với Perfekt và Präteritum.', examples: ['Wir hatten die Teile bestellt, bevor der Termin geändert wurde.', 'Ich hatte den Bericht fertiggestellt, bevor die Besprechung begann.'] },
+  { level: 'B2', title: 'Konjunktiv II quá khứ', vi: 'Hätte/wäre + Partizip II diễn tả giả định hoặc tiếc nuối về quá khứ.', note: 'Thường đi với wenn trong mệnh đề điều kiện.', examples: ['Ich hätte den Fehler früher bemerkt.', 'Wir wären pünktlich angekommen, wenn der Zug nicht ausgefallen wäre.'] },
+  { level: 'B2', title: 'Bị động với động từ khuyết thiếu', vi: 'Modalverb + Partizip II + werden diễn tả việc cần/có thể được thực hiện.', note: 'Động từ khuyết thiếu chia; Partizip II và werden đứng cuối.', examples: ['Die Schrauben müssen kontrolliert werden.', 'Der Fehler kann schnell behoben werden.'] },
+  { level: 'B2', title: 'Partizip I và Partizip II làm tính từ', vi: 'Partizip I thường mang nghĩa chủ động; Partizip II thường mô tả kết quả/trạng thái.', note: 'Ví dụ: laufende Produktion; geprüftes Bauteil.', examples: ['Die laufende Produktion darf nicht gestört werden.', 'Das geprüfte Bauteil liegt hier.'] },
+  { level: 'B2', title: 'Nomen-Verb-Verbindungen', vi: 'Kết hợp danh từ và động từ tạo cách diễn đạt tự nhiên, trang trọng.', note: 'Học cả cụm như eine Entscheidung treffen, eine Prüfung durchführen.', examples: ['Wir treffen eine Entscheidung.', 'Der Techniker führt eine Prüfung durch.'] },
+  { level: 'B2', title: 'je ... desto', vi: 'Diễn tả hai sự thay đổi tăng/giảm tương ứng.', note: 'Mệnh đề je có động từ cuối; mệnh đề desto có đảo vị trí động từ.', examples: ['Je genauer wir messen, desto sicherer ist das Ergebnis.', 'Je länger die Maschine läuft, desto wärmer wird sie.'] },
+  { level: 'B2', title: 'indem + Nebensatz', vi: 'Indem diễn tả cách thức hoặc phương tiện để đạt kết quả.', note: 'Động từ chia đứng cuối mệnh đề indem.', examples: ['Wir sparen Zeit, indem wir den Prozess verbessern.', 'Er löst das Problem, indem er die Maße neu berechnet.'] },
+  { level: 'B2', title: 'sofern + Nebensatz', vi: 'Sofern diễn tả điều kiện với sắc thái trang trọng.', note: 'Động từ chia đứng cuối mệnh đề sofern.', examples: ['Sofern alle Teile verfügbar sind, beginnen wir morgen.', 'Sofern die Daten stimmen, geben wir den Auftrag frei.'] },
+  { level: 'B2', title: 'während', vi: 'Während có thể mở đầu mệnh đề phụ chỉ thời gian hoặc sự tương phản.', note: 'Trong mệnh đề phụ, động từ chia đứng cuối.', examples: ['Während die Maschine läuft, kontrollieren wir die Werte.', 'Während der Prüfung notieren wir alle Ergebnisse.'] },
+  { level: 'B2', title: 'einerseits ... andererseits', vi: 'Nêu hai mặt hoặc hai khía cạnh đối lập của một vấn đề.', note: 'Dùng để lập luận cân bằng trong thảo luận và bài viết.', examples: ['Einerseits ist die Lösung günstig, andererseits ist sie langsam.', 'Einerseits brauchen wir mehr Personal, andererseits müssen wir Kosten sparen.'] }
+];
+const EXPANDED_GRAMMAR = GRAMMAR_TOPICS.flatMap((topic, topicIndex) =>
+  topic.examples.map((example, exampleIndex) => ({
+    id: 'g' + String(topicIndex * 2 + exampleIndex + 1).padStart(3, '0'),
+    category: 'ngu_phap_moi',
+    tag: 'Ngữ pháp ' + topic.level,
+    de: topic.title,
+    vi: topic.vi,
+    note: topic.note,
+    example
+  }))
+);
+
 export default function App() {
   // Theme & App Navigation State
   const [darkMode, setDarkMode] = useState(false);
@@ -290,6 +457,37 @@ export default function App() {
   // Filtered Cards
   const filteredDailyCards = dailyCards.filter(c => selectedFilter === 'all' || c.category === selectedFilter);
   const currentCard = filteredDailyCards[activeCardIndex] || filteredDailyCards[0];
+  const [expandedDay, setExpandedDay] = useState(() => Math.max(1, Math.min(50, Number(localStorage.getItem('dm_expanded_day') || '1'))));
+  const [expandedCardIndex, setExpandedCardIndex] = useState(0);
+  const [expandedFlipped, setExpandedFlipped] = useState(false);
+  const [expandedFilter, setExpandedFilter] = useState('all');
+  const [expandedMasteredIds, setExpandedMasteredIds] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('dm_expanded_mastered') || '[]'); } catch { return []; }
+  });
+  const expandedDayCards = [
+    ...EXPANDED_VOCABULARY.slice((expandedDay - 1) * 20, expandedDay * 20),
+    ...EXPANDED_GRAMMAR.slice((expandedDay - 1) * 2, expandedDay * 2)
+  ];
+  const expandedFilteredCards = expandedDayCards.filter(card =>
+    expandedFilter === 'all' || card.category === expandedFilter
+  );
+  const expandedCurrentCard = expandedFilteredCards[expandedCardIndex] || expandedFilteredCards[0];
+  const expandedMasteredCount = expandedDayCards.filter(card => expandedMasteredIds.includes(card.id)).length;
+  const expandedProgress = Math.round((expandedMasteredCount / 22) * 100);
+  const handleExpandedDayChange = (value) => {
+    const next = Math.max(1, Math.min(50, Number(value) || 1));
+    setExpandedDay(next);
+    localStorage.setItem('dm_expanded_day', String(next));
+    setExpandedCardIndex(0);
+    setExpandedFlipped(false);
+  };
+  const toggleExpandedMastered = (id) => {
+    const next = expandedMasteredIds.includes(id)
+      ? expandedMasteredIds.filter(item => item !== id)
+      : [...expandedMasteredIds, id];
+    setExpandedMasteredIds(next);
+    localStorage.setItem('dm_expanded_mastered', JSON.stringify(next));
+  };
 
   // Tự đổi bộ 15 thẻ khi sang ngày mới; nút bấm tải lại bộ của ngày hiện tại.
   const handleRefreshDailyDeck = () => {
@@ -667,6 +865,7 @@ END:VCALENDAR`;
         <div className="max-w-7xl mx-auto flex space-x-1 md:space-x-4 py-2">
           {[
             { id: 'daily_hub', label: '🔥 Học Hàng Ngày (25 Bài)', icon: Sparkles },
+            { id: 'expanded_vocab', label: '📚 50 Ngày • 1.000 Từ + 100 Ngữ Pháp', icon: BookOpen },
             { id: 'roadmap', label: 'Lộ Trình A1-B2', icon: Layers },
             { id: 'lesson', label: 'Luyện Nghe & Bài Test', icon: BookOpen },
             { id: 'ai_interview', label: 'Phòng Nói AI (Voice-to-Voice)', icon: Mic },
@@ -940,7 +1139,99 @@ END:VCALENDAR`;
           </div>
         )}
 
+{activeTab === 'expanded_vocab' && (
+          <div className="space-y-5">
+            <div className="bg-gradient-to-r from-emerald-800 via-teal-900 to-emerald-950 text-white rounded-3xl p-6 md:p-8 shadow-lg space-y-3">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="px-3 py-1 bg-amber-500/20 text-amber-300 text-xs font-bold rounded-full border border-amber-400/30">Lộ trình học mở rộng</span>
+                <span className="text-xs text-emerald-200">50 NGÀY • 1.000 TỪ • 100 THẺ NGỮ PHÁP</span>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold">Mỗi ngày 20 từ mới + 2 mục ngữ pháp</h2>
+              <p className="text-emerald-100/90 text-sm">Giữ nguyên kho bài học cũ. Phần mở rộng được chia thành 50 ngày, tiến độ đã thuộc được lưu trên điện thoại.</p>
+              <div className="flex items-center gap-3 text-xs">
+                <span>Ngày {expandedDay}/50</span>
+                <div className="flex-1 max-w-xs h-2.5 rounded-full bg-white/20 overflow-hidden"><div className="h-full bg-emerald-300 rounded-full" style={{width: expandedProgress + '%'}} /></div>
+                <strong>{expandedMasteredCount}/22 • {expandedProgress}%</strong>
+              </div>
+            </div>
+
+            <div className="bg-white dark:bg-slate-900 rounded-3xl p-4 md:p-5 border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+              <div>
+                <h3 className="font-bold text-sm">Chọn ngày học</h3>
+                <p className="text-xs text-slate-500">Mỗi ngày có đúng 20 thẻ từ vựng và 2 thẻ ngữ pháp.</p>
+              </div>
+              <select value={expandedDay} onChange={e => handleExpandedDayChange(e.target.value)} className="w-full sm:w-52 rounded-xl border border-emerald-200 dark:border-slate-700 bg-emerald-50 dark:bg-slate-800 px-3 py-3 text-sm font-semibold">
+                {Array.from({length: 50}, (_, i) => <option key={i + 1} value={i + 1}>Ngày {i + 1} / 50</option>)}
+              </select>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {[
+                {id:'all', label:'Tất cả 22 thẻ'},
+                {id:'tu_vung_moi', label:'20 từ vựng'},
+                {id:'ngu_phap_moi', label:'2 ngữ pháp'}
+              ].map(item => (
+                <button key={item.id} onClick={() => {setExpandedFilter(item.id); setExpandedCardIndex(0); setExpandedFlipped(false);}} className={'px-4 py-2 rounded-xl text-xs font-semibold ' + (expandedFilter === item.id ? 'bg-emerald-700 text-white' : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300')}>
+                  {item.label}
+                </button>
+              ))}
+            </div>
+
+            {expandedCurrentCard && (
+              <div className="max-w-2xl mx-auto space-y-4">
+                <div className="flex items-center justify-between text-xs text-slate-500 px-2">
+                  <span>Thẻ {expandedCardIndex + 1} / {expandedFilteredCards.length}</span>
+                  <span className="font-bold text-emerald-700 dark:text-emerald-300">{expandedCurrentCard.tag}</span>
+                </div>
+                <div onClick={() => setExpandedFlipped(!expandedFlipped)} className="min-h-[280px] bg-white dark:bg-slate-900 border-2 border-emerald-600/40 rounded-3xl p-6 md:p-8 shadow-md cursor-pointer flex flex-col justify-between gap-6">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">{expandedFlipped ? 'Nghĩa & giải thích' : 'Tiếng Đức'}</span>
+                    <button onClick={e => {e.stopPropagation(); speakGerman(expandedCurrentCard.de);}} className="p-2.5 bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 rounded-xl"><Volume2 className="w-5 h-5" /></button>
+                  </div>
+                  {!expandedFlipped ? (
+                    <div className="my-auto text-center space-y-3">
+                      <h3 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-100">{expandedCurrentCard.de}</h3>
+                      <p className="text-xs text-slate-500">Chạm vào thẻ để xem nghĩa và ví dụ.</p>
+                    </div>
+                  ) : (
+                    <div className="my-auto space-y-3">
+                      <h4 className="text-xl font-bold text-emerald-800 dark:text-emerald-300">{expandedCurrentCard.vi}</h4>
+                      <p className="text-sm text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800 rounded-xl p-3">{expandedCurrentCard.note}</p>
+                      <p className="text-sm italic text-slate-500 dark:text-slate-400">Ví dụ: {expandedCurrentCard.example}</p>
+                    </div>
+                  )}
+                  <div className="flex items-center justify-between border-t border-slate-100 dark:border-slate-800 pt-4 gap-2">
+                    <span className="text-[11px] text-slate-400">Chạm thẻ để lật</span>
+                    <button onClick={e => {e.stopPropagation(); toggleExpandedMastered(expandedCurrentCard.id);}} className={'px-3 py-2 rounded-xl text-xs font-semibold ' + (expandedMasteredIds.includes(expandedCurrentCard.id) ? 'bg-emerald-700 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200')}>
+                      <CheckCircle2 className="w-4 h-4 inline mr-1" />{expandedMasteredIds.includes(expandedCurrentCard.id) ? 'Đã thuộc' : 'Đánh dấu đã thuộc'}
+                    </button>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <button disabled={expandedCardIndex === 0} onClick={() => {setExpandedCardIndex(v => v - 1); setExpandedFlipped(false);}} className="flex-1 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-semibold disabled:opacity-40">← Thẻ trước</button>
+                  <button disabled={expandedCardIndex >= expandedFilteredCards.length - 1} onClick={() => {setExpandedCardIndex(v => v + 1); setExpandedFlipped(false);}} className="flex-1 py-3 rounded-xl bg-emerald-700 text-white text-xs font-semibold disabled:opacity-40">Thẻ tiếp theo →</button>
+                </div>
+              </div>
+            )}
+
+            <div className="bg-white dark:bg-slate-900 rounded-3xl p-4 md:p-6 border border-slate-200 dark:border-slate-800 space-y-3">
+              <h3 className="font-bold text-sm">Danh sách bài học ngày {expandedDay}</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {expandedFilteredCards.map((card, index) => (
+                  <button key={card.id} onClick={() => {setExpandedCardIndex(index); setExpandedFlipped(false);}} className={'text-left p-3 rounded-xl border ' + (expandedMasteredIds.includes(card.id) ? 'border-emerald-300 bg-emerald-50 dark:bg-emerald-950/20' : 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50')}>
+                    <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-300">{card.tag}</span>
+                    <div className="font-bold text-sm mt-1">{card.de}</div>
+                    <div className="text-xs text-slate-500 mt-1">{card.vi}</div>
+                    {expandedMasteredIds.includes(card.id) && <div className="text-[10px] text-emerald-700 mt-2">✓ Đã thuộc</div>}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* TAB 1: LỘ TRÌNH HỌC (ROADMAP A1 - B2 & CƠ KHÍ) */}
+
         {activeTab === 'roadmap' && (
           <div className="space-y-6">
             <div className="bg-gradient-to-r from-emerald-800 to-teal-900 text-white rounded-3xl p-6 md:p-8 shadow-lg relative overflow-hidden">
@@ -1348,6 +1639,7 @@ END:VCALENDAR`;
       <nav className="mobile-bottom-nav" aria-label="Điều hướng chính">
         {[
           { id: 'daily_hub', label: 'Hằng ngày', icon: Sparkles },
+          { id: 'expanded_vocab', label: '50 ngày', icon: BookOpen },
           { id: 'roadmap', label: 'Lộ trình', icon: Layers },
           { id: 'lesson', label: 'Bài học', icon: BookOpen },
           { id: 'ai_interview', label: 'Luyện nói', icon: Mic },
