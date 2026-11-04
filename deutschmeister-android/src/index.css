@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color-scheme: light;
+  -webkit-tap-highlight-color: transparent;
+}
+html { min-height: 100%; -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; min-height: 100vh; overscroll-behavior-y: contain; }
+button, input, select, textarea { font: inherit; }
+button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+button, [role="button"] { min-height: 40px; }
+img, svg { flex-shrink: 0; }
+
+.desktop-tabs { display: block; }
+.mobile-bottom-nav { display: none; }
+
+@media (max-width: 767px) {
+  html, body, #root { min-height: 100%; }
+  body { padding-bottom: env(safe-area-inset-bottom); }
+  header { padding-top: max(0.65rem, env(safe-area-inset-top)) !important; }
+  header h1 { font-size: 0.95rem !important; line-height: 1.2; }
+  header h1 span { display: none !important; }
+  header p { display: none !important; }
+  header .w-10.h-10 { width: 2.4rem; height: 2.4rem; border-radius: 0.85rem; }
+  header .flex.items-center.space-x-3 { gap: 0.5rem; }
+  header .flex.items-center.space-x-3 > div:nth-child(2) { display: none; }
+  header .flex.items-center.space-x-1\.5 { padding: 0.4rem 0.5rem; }
+  header .flex.items-center.space-x-1\.5 span { font-size: 0.65rem; }
+  .desktop-tabs { display: none !important; }
+  main { padding: 0.85rem !important; padding-bottom: calc(5.8rem + env(safe-area-inset-bottom)) !important; }
+  main > div, main section { min-width: 0; }
+  main .rounded-3xl { border-radius: 1.2rem; }
+  main .p-6 { padding: 1rem; }
+  main .p-8 { padding: 1.1rem; }
+  main h2 { overflow-wrap: anywhere; }
+  main button { min-height: 44px; }
+  input, select, textarea { font-size: 16px !important; }
+  .mobile-bottom-nav {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    position: fixed;
+    z-index: 60;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.4rem 0.2rem calc(0.4rem + env(safe-area-inset-bottom));
+    background: rgba(255,255,255,0.96);
+    border-top: 1px solid rgba(15, 118, 110, 0.18);
+    box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.08);
+    backdrop-filter: blur(18px);
+  }
+  .dark .mobile-bottom-nav { background: rgba(15,23,42,0.97); border-top-color: rgba(71,85,105,0.7); }
+  .mobile-nav-item {
+    min-width: 0;
+    min-height: 3.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    padding: 0.2rem 0.05rem;
+    border: 0;
+    border-radius: 0.75rem;
+    background: transparent;
+    color: #64748b;
+    font-size: 0.58rem;
+    line-height: 1.1;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .mobile-nav-item-active { color: #047857; background: rgba(16,185,129,0.12); }
+  .dark .mobile-nav-item { color: #cbd5e1; }
+  .dark .mobile-nav-item-active { color: #6ee7b7; background: rgba(16,185,129,0.16); }
+  footer { padding-bottom: calc(5.7rem + env(safe-area-inset-bottom)) !important; }
+  /* Avoid a cramped install banner on narrow screens. */
+  .bg-emerald-800.text-white.px-4.py-2\.5 { flex-wrap: wrap; gap: 0.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
